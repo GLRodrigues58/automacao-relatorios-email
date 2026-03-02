@@ -1,44 +1,36 @@
-# 📊 Inteligência de vendas e sistema de relatórios automatizados
+# 📊 Inteligência de Vendas e Sistema de Relatórios Automatizados
 
-Este projeto automatiza o fluxo de consolidação de dados, cálculo de KPIs e distribuição de relatórios personalizados por e-mail, simulando um cenário real de BI (Business Intelligence) para uma rede de varejo multiloja.
+Este projeto automatiza o fluxo de consolidação de dados, estruturação em banco de dados relacional e distribuição de relatórios personalizados, simulando um cenário real de Engenharia de Dados e BI para o varejo.
 
 ## 📌 1. O Problema de Negócio
-Em operações de varejo com múltiplas unidades, a consolidação manual de dados de vendas é um processo lento e propenso a falhas. O tempo gasto por analistas para gerar métricas e enviar relatórios individuais para cada gerente atrasa a tomada de decisão estratégica.
+A consolidação manual de dados de vendas em múltiplas unidades é lenta e sujeita a erros. O tempo gasto para gerar métricas e enviar relatórios individuais atrasa a tomada de decisão estratégica.
 
-**O Desafio:** Criar uma solução escalável que processe milhares de registros e garanta a entrega de KPIs críticos diretamente aos responsáveis (Gerentes e Diretores) de forma automática e segura.
+**O Desafio:** Criar uma solução escalável que processe milhares de registros, garanta a integridade dos dados via SQL e entregue KPIs críticos automaticamente e com segurança.
 
 ## 🛠️ 2. Decisões Técnicas & Stack
-A arquitetura da solução foca em **robustez** e **autonomia**:
+A arquitetura da solução foca em **governança** e **rastreabilidade**:
 
-* **Python & Pandas:** Utilizados para o motor de ETL (Extração, Transformação e Carga), permitindo o processamento eficiente de bases de dados volumosas.
-* **Agrupamento Dinâmico:** Implementação de lógica de agrupamento (`.groupby`) para segmentar KPIs por unidade de negócio (ID Loja).
-* **Integração SMTP (Smtplib):** Automação do envio de e-mails com suporte a corpo de mensagem em HTML, garantindo uma apresentação visual profissional e acessível para dispositivos móveis.
-* **Segurança de Credenciais:** Uso de variáveis de ambiente para gerenciamento de tokens e senhas de e-mail, seguindo boas práticas de segurança de software.
+* **Python & Pandas:** Motor de ETL para processamento e transformação de bases volumosas.
+* **SQL (SQLite) & SQLAlchemy:** Migração de dados estáticos para um banco de dados relacional, garantindo persistência e integridade.
+* **SQL Views:** Implementação da `vw_insights_vendas` para processar cálculos complexos (como Ticket Médio) diretamente no banco, otimizando a performance.
+* **Sistema de Logging:** Implementação de rastreabilidade total do pipeline, registrando sucessos e falhas em um arquivo `.log` para auditoria.
+* **Integração SMTP (Smtplib):** Envio automatizado de e-mails em HTML profissional.
+* **Segurança (Secrets):** Uso de variáveis de ambiente e Senhas de App para proteção de credenciais.
 
 ## 🚀 3. Desafios de Engenharia & Impacto
-O projeto foi estruturado para ser entregue como uma solução corporativa:
+O projeto foi elevado ao nível de solução corporativa:
 
-* **Escalabilidade:** O script processa e distribui dados para 25 lojas em questão de segundos, uma tarefa que levaria horas se feita manualmente.
-* **KPIs Automatizados:**
-    * **Faturamento Total:** Visão macro da performance financeira.
-    * **Diversidade de Produtos:** Monitoramento da variedade vendida por unidade.
-    * **Ticket Médio:** Indicador chave de eficiência de vendas por cliente.
-* **Visão Executiva:** Além dos envios individuais, o sistema gera um "One Page Report" consolidado para a diretoria com o ranking de performance das unidades.
+* **Escalabilidade e Performance:** O uso de **Views SQL** permite que ferramentas externas consumam dados já agregados, reduzindo o consumo de memória.
+* **Rastreabilidade (Observabilidade):** Com o sistema de **Logger**, o pipeline comunica exatamente onde e por que um erro ocorreu, facilitando a manutenção.
+* **KPIs Automatizados via SQL:**
+    * **Faturamento Total:** Consolidado por unidade.
+    * **Ticket Médio:** Calculado nativamente no banco de dados.
+    * **Volume de Pedidos:** Contagem única de transações por loja.
 
 ## 🔍 4. Perguntas de Negócio Respondidas
 * *Qual unidade possui a melhor eficiência de venda (Ticket Médio)?*
-* *Quais lojas atingiram o volume de vendas esperado?*
-* *Como garantir que a informação chegue ao tomador de decisão sem intervenção humana diária?*
+* *Como garantir a integridade dos dados históricos através de um banco de dados?*
+* *Como monitorar falhas no processo de automação sem precisar revisar o código manualmente?*
 
-## 🔮 O que eu faria diferente? (Próximos Passos)
-1.  **Persistência em SQL:** Migrar a base de arquivos estáticos (`.xlsx`) para um banco de dados relacional (PostgreSQL/SQLite) para maior integridade dos dados.
-2.  **Visualização:** Conectar o output a um dashboard no Power BI/Tableau para análise de tendências históricas.
-3.  **Monitoramento:** Implementar logs de envio para garantir o rastreio de possíveis falhas na rede de e-mails.
-
-## 🚀 Como executar
-
-```bash
-pip install -r requirements.txt
-```
 ---
-Desenvolvido por **Guilherme Rodrigues**
+**Desenvolvido por Guilherme Rodrigues** [LinkedIn](https://www.linkedin.com/in/guilherme584rodrigues/) | [GitHub](https://github.com/GLRodrigues58)
